@@ -3,7 +3,7 @@
  * the elements even if we have free spaces in front side
  * 
  * we can over come this problem by using circular array, once reaches end its again back to first index ie from 0,
- *  and enqueueing the elements until queue full.
+ *  and enqueueing the elements until queue full. - https://www.youtube.com/watch?v=okr-XE8yTO8
  */
 public class CircularArrayQueue {
 	private int front;
