@@ -19,7 +19,7 @@ public class CircularArrayQueue {
 			System.out.println("Queue is Full , enQueue Failed: " + value);
 			return;
 		} else {
-			rear++;
+			rear = (rear + 1) % N;
 		}
 		arr[rear] = value;
 		System.out.println("After enQueue: " + value);
@@ -30,23 +30,22 @@ public class CircularArrayQueue {
 		if (isEmpty()) {
 			System.out.println("Queue is Empty , deQueue Failed: ");
 			return null;
-		}
-		if (isHaveSingleElement())
+		} else if (isHaveSingleElement()) {
+			System.out
+					.println("Before deQueue , Queue has only 1 element, deQueus is Successful, Now its EMPTY ");
 			makeQueueEmpty();
-
-		front++;
-		Object value = arr[front];
-		System.out.println("After deQueue: " + value);
-		printQueue();
-		return value;
+			return null;
+		} else {
+			front = (front + 1) % N;
+			Object value = arr[front];
+			System.out.println("After deQueue: " + value);
+			printQueue();
+			return value;
+		}
 	}
 
 	private boolean isHaveSingleElement() {
 		return (front == rear) && !isEmpty();
-	}
-
-	private boolean isNoSpace() {
-		return (rear + 1) % N == front;
 	}
 
 	private void makeQueueEmpty() {
@@ -59,13 +58,27 @@ public class CircularArrayQueue {
 	}
 
 	private boolean isFull() {
-		return !isEmpty() && (rear + 1) % N == 0;
+		return !isEmpty() && (rear + 1) % N == front;
 	}
 
 	private void printQueue() {
-		for (int i = front; i <= rear; i++) {
+		for (int i = front; i < N; i++) {
 			System.out.print(" " + arr[i]);
 		}
+		if (front > rear) {
+			for (int i = 0; i <= rear; i++) {
+				System.out.print(" : " + arr[i]);
+			}
+		}
 		System.out.println();
+	}
+	public static void main(String[] args) {
+		CircularArrayQueue queue = new CircularArrayQueue(5);
+		queue.enQueue("Balu1");
+		queue.enQueue("Balu2");
+		queue.deQueue();
+		queue.enQueue("Balu3");
+		queue.enQueue("Balu4");
+		queue.deQueue();
 	}
 }
