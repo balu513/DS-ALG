@@ -1,3 +1,10 @@
+/*
+ * In Normal Array with Queue ,once its rear reaches end of the array even after few elements dequeue not able to enqueue 
+ * the elements even if we have free spaces in front side
+ * 
+ * we can over come this problem by using circular array, once reaches end its again back to first index ie from 0,
+ *  and enqueueing the elements until queue full.
+ */
 public class CircularArrayQueue {
 	private int front;
 	private int rear;
@@ -72,6 +79,7 @@ public class CircularArrayQueue {
 		}
 		System.out.println();
 	}
+
 	public static void main(String[] args) {
 		CircularArrayQueue queue = new CircularArrayQueue(5);
 		queue.enQueue("Balu1");
